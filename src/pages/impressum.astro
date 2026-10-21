@@ -1,0 +1,31 @@
+---
+import Basis from '../layouts/Basis.astro';
+import { praxis, meta } from '../data/site';
+// Gerüst nach Spezifikation §8.1. Pflichtangaben kommen von der Kundin, nichts erfinden. Vor Go-Live anwaltlich prüfen.
+---
+<Basis titel={meta.impressum.titel} beschreibung={meta.impressum.beschreibung} brotkrumen={[{ name: 'Impressum', pfad: 'impressum/' }]}>
+  <div class="seitenkopf"><div class="wrap"><h1>Impressum</h1></div></div>
+  <section class="ohne-oben">
+    <div class="wrap text recht">
+      <p class="platzhalter">Vorschau: Dieses Impressum ist ein Gerüst. Markierte Angaben fehlen noch und werden vor dem Livegang ergänzt und geprüft.</p>
+      <h2>Anbieterin</h2>
+      <p>{praxis.inhaberin}<br />{praxis.name}, {praxis.untertitel}<br />{praxis.strasse}<br />{praxis.plz} {praxis.ort}</p>
+      <!-- TODO vom Kunden: Anschrift für das Impressum bestätigen (stammt aus Spezifikation §5.4). -->
+      <p class="platzhalter">TODO: Anschrift für das Impressum bestätigen.</p>
+      <h2>Rechtsform</h2>
+      <!-- TODO vom Kunden: Rechtsform (laut Spezifikation freiberuflich, zu bestätigen) -->
+      <p class="platzhalter">TODO: Rechtsform von der Kundin bestätigen.</p>
+      <h2>Kontakt</h2>
+      <!-- TODO: E-Mail-Adresse noch nicht bestätigt. -->
+      <p>E-Mail: {praxis.email}</p>
+      <p class="platzhalter">TODO: E-Mail-Adresse bestätigen, ggf. Telefonnummer ergänzen.</p>
+      <h2>Berufsbezeichnung</h2>
+      <p>{praxis.beruf}</p>
+      <p class="platzhalter">TODO: weitere berufsrechtliche Angaben prüfen (falls erforderlich).</p>
+      <h2>Verantwortlich für den Inhalt</h2>
+      <p class="platzhalter">TODO: verantwortliche Person von der Kundin.</p>
+      <h2>Weitere Angaben</h2>
+      <p class="platzhalter">TODO: weitere Pflichtangaben (z. B. Umsatzsteuer, Streitschlichtung) nach anwaltlicher Prüfung ergänzen.</p>
+    </div>
+  </section>
+</Basis>

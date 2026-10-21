@@ -1,0 +1,9 @@
+---
+// Dezentes Gingkoblatt (Spezifikation §2/§9). Rein dekorativ.
+const { class: klasse = '' } = Astro.props;
+---
+<svg class={klasse} viewBox="0 0 100 100" aria-hidden="true" focusable="false">
+  <path fill="currentColor" d="M50 62 9 28Q26 10 46 12l4 13 4-13q20-2 37 16z" opacity=".9"/>
+  <path fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" d="M50 60v32"/>
+  <path fill="none" stroke="var(--cream, #fff)" stroke-width="1" stroke-linecap="round" opacity=".55" d="M50 60 20 30M50 60 32 20M50 60 44 16M50 60 56 16M50 60 68 20M50 60 80 30"/>
+</svg>

@@ -1,0 +1,41 @@
+---
+import { Image } from 'astro:assets';
+import Basis from '../layouts/Basis.astro';
+import portraet from '../assets/miryam-016.jpg';
+import gemaelde from '../assets/miryam-005.jpg';
+import BildSlot from '../components/BildSlot.astro';
+import { ueberMich, praxis, meta } from '../data/site';
+---
+<Basis titel={meta.ueberMich.titel} beschreibung={meta.ueberMich.beschreibung} brotkrumen={[{ name: 'Über mich', pfad: 'ueber-mich/' }]}>
+  <div class="seitenkopf">
+    <div class="wrap raster-2">
+      <div class="text">
+        <h1>{ueberMich.titel}</h1>
+        {ueberMich.absaetze.map((a) => <p>{a}</p>)}
+        <p class="leit">{ueberMich.leitsatz}</p>
+      </div>
+      <div class="foto">
+        <Image src={portraet} alt="Hilda Miryam Loewenstein in ihrer Praxis" widths={[400, 600, 900]} sizes="(max-width: 860px) 100vw, 460px" loading="eager" style="object-position:60% 20%" />
+      </div>
+    </div>
+  </div>
+  <section class="ueber" aria-labelledby="profil-titel">
+    <div class="wrap">
+      <div class="foto">
+        <Image src={gemaelde} alt="" width={700} height={467} widths={[400, 700]} sizes="(max-width: 860px) 100vw, 430px" style="object-position:30% 40%" />
+      </div>
+      <div>
+        <h2 id="profil-titel" style="font-size:36px">Kurzprofil</h2>
+        <ul class="profil">{ueberMich.kurzprofil.map((k) => <li>{k}</li>)}</ul>
+        <p class="hinweis" style="margin-top:22px">{praxis.berufLang}. {praxis.disclaimer}</p>
+      </div>
+    </div>
+  </section>
+  <section aria-label="Weitere Fotos">
+    <div class="wrap wege" style="grid-template-columns:repeat(3,1fr)">
+      <BildSlot name="praxisraum" beschreibung="Der Praxisraum in Frankfurt" />
+      <BildSlot name="miryam-arbeit" beschreibung="Miryam in ihrer Praxis in Frankfurt" />
+      <BildSlot name="balancer-hand" beschreibung="Ein Balancer aus weichem Silikon" />
+    </div>
+  </section>
+</Basis>

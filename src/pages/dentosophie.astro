@@ -1,0 +1,76 @@
+---
+import Basis from '../layouts/Basis.astro';
+import FaqAccordion from '../components/FaqAccordion.astro';
+import BildSlot from '../components/BildSlot.astro';
+import BuchungsLink from '../components/BuchungsLink.astro';
+import GingkoTrenner from '../components/GingkoTrenner.astro';
+import { dentosophie as d, faq, meta, cta } from '../data/site';
+import { url } from '../lib/url';
+
+const faqJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  inLanguage: 'de',
+  mainEntity: faq.map((f) => ({
+    '@type': 'Question',
+    name: f.frage,
+    acceptedAnswer: { '@type': 'Answer', text: f.antwort },
+  })),
+};
+---
+<Basis titel={meta.dentosophie.titel} beschreibung={meta.dentosophie.beschreibung} brotkrumen={[{ name: 'Dentosophie', pfad: 'dentosophie/' }]} jsonld={[faqJsonLd]}>
+  <div class="seitenkopf">
+    <div class="wrap raster-2">
+      <div class="text">
+        <h1>Was ist <em>Dentosophie?</em></h1>
+        {d.einleitung.map((a) => <p>{a}</p>)}
+        <div class="knoepfe" style="margin-top:30px">
+          <BuchungsLink text={cta.button} />
+        </div>
+        <span class="hinweis-neu">{cta.hinweis}</span>
+      </div>
+      <div>
+        <BildSlot name="balancer" beschreibung="Ein Balancer aus weichem Silikon" />
+      </div>
+    </div>
+  </div>
+
+  <section class="dento" aria-labelledby="balancer-titel">
+    <div class="wrap">
+      <div class="text">
+        <h2 id="balancer-titel">{d.balancerTitel}</h2>
+        <p>{d.balancerText}</p>
+        <h3>{d.kommenTitel}</h3>
+        <ul class="liste-weich">{d.kommen.map((k) => <li>{k}</li>)}</ul>
+        <p class="hinweis" style="margin-top:22px">{d.hinweis}</p>
+      </div>
+      <div class="text">
+        <h2>{d.ablaufTitel}</h2>
+        <ol class="weg-linie" style="margin-top:26px">
+          {d.ablauf.map((s, i) => (
+            <li class="schritt"><span class="kreis" aria-hidden="true">{i + 1}</span><h3 style="margin-top:0">{s.titel}</h3><p>{s.text}</p></li>
+          ))}
+        </ol>
+      </div>
+    </div>
+  </section>
+
+  <section aria-labelledby="dauer-titel">
+    <div class="wrap text">
+      <h2 id="dauer-titel">{d.dauerTitel}</h2>
+      <ul class="dauer">
+        {d.dauer.map((x) => <li><h3>{x.wer}</h3><p>{x.text}</p></li>)}
+      </ul>
+      <p style="margin-top:22px">Was die Begleitung kostet, findest du bei den <a class="mehr" style="margin-top:0" href={url('preise/')}>Preisen</a>.</p>
+    </div>
+  </section>
+
+  <GingkoTrenner />
+
+  <section id="fragen" aria-labelledby="fragen-titel">
+    <div class="wrap schmal">
+      <div class="kopf" style="margin-bottom:20px"><h2 id="fragen-titel">{d.faqTitel}</h2></div>
+      <FaqAccordion fragen={faq} />
+    </div>
+  </section>
+</Basis>

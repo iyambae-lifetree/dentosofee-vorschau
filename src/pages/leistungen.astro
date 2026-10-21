@@ -1,0 +1,50 @@
+---
+import Basis from '../layouts/Basis.astro';
+import { leistungen, leistungenEinleitung, preise, praxis, meta } from '../data/site';
+import { url } from '../lib/url';
+
+// Preisangaben je Leistung direkt aus der Preistabelle (§7.2), damit nichts doppelt gepflegt wird.
+const alleZeilen = preise.flatMap((g) => g.zeilen);
+const preisFuer: Record<string, string[]> = {
+  dentosophie: alleZeilen.filter((z) => z.leistung.startsWith('Dentosophie')).map((z) => `${z.leistung.replace('Dentosophie ', '')}: ${z.preis}`),
+  zahnpflege: alleZeilen.filter((z) => z.leistung === 'Ganzheitliche Zahnpflege').map((z) => `${z.umfang}: ${z.preis}`),
+  dentcoat: alleZeilen.filter((z) => z.leistung.startsWith('Dentcoat')).map((z) => `${z.leistung.replace('Dentcoat ', '')}: ${z.preis}`),
+  bowen: alleZeilen.filter((z) => z.leistung.startsWith('Bowtech')).map((z) => `${z.leistung.replace('Bowtech / Bowen ', '')}: ${z.preis}`),
+  infrarot: alleZeilen.filter((z) => z.leistung.startsWith('Infrarot')).map((z) => `pro Anwendung: ${z.preis}`),
+};
+---
+<Basis titel={meta.leistungen.titel} beschreibung={meta.leistungen.beschreibung} brotkrumen={[{ name: 'Leistungen', pfad: 'leistungen/' }]}>
+  <div class="seitenkopf">
+    <div class="wrap">
+      <h1>Leistungen</h1>
+      <p class="lead">{leistungenEinleitung}</p>
+    </div>
+  </div>
+
+  <section class="ohne-oben">
+    <div class="wrap">
+      {leistungen.map((l, i) => (
+        <article id={l.id} class={['leistung', i === 0 && 'haupt', l.id === 'hausbesuche' && 'nachrangig'].filter(Boolean).join(' ')} aria-labelledby={`t-${l.id}`}>
+          <div>
+            <h2 id={`t-${l.id}`}>{l.titel}</h2>
+            {l.bald && <p style="margin-top:10px"><span class="bald">Bald verfügbar</span></p>}
+          </div>
+          <div>
+            {l.text.map((t) => <p>{t}</p>)}
+            {l.id === 'infrarot' && <p>Die Infrarot-Anwendung kommt bald dazu.</p>}
+            {l.folgt && <p class="folgt" style="margin-top:8px">{l.folgt}</p>}
+            {l.zusatz && <div class="zusatz">{l.zusatz.map((z) => <p>{z}</p>)}</div>}
+            {preisFuer[l.id] && (
+              <p class="meta"><span class="preisinfo">{preisFuer[l.id].join(' · ')}</span></p>
+            )}
+            {/* TODO: Preis Fußmassage fehlt in der Spezifikation. Kein Preis erfinden. */}
+            {l.preisFolgt && <p class="meta"><span class="folgt">Preis folgt</span></p>}
+            {l.link && <a class="mehr" href={url(l.link.pfad)}>{l.link.label}</a>}
+          </div>
+        </article>
+      ))}
+      <p class="hinweis" style="margin-top:40px">{praxis.disclaimer}</p>
+      <p style="margin-top:28px"><a class="mehr" style="margin-top:0" href={url('preise/')}>Alle Preise ansehen</a></p>
+    </div>
+  </section>
+</Basis>

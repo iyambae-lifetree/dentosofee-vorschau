@@ -1,0 +1,13 @@
+---
+// Akkordeon mit nativen <details>. Das FAQPage-JSON-LD setzt die Seite /dentosophie (vollständige Liste).
+interface Props { fragen: { frage: string; antwort: string }[]; erstesOffen?: boolean }
+const { fragen, erstesOffen = true } = Astro.props;
+---
+<div class="faq">
+  {fragen.map((f, i) => (
+    <details open={erstesOffen && i === 0}>
+      <summary>{f.frage}</summary>
+      <p>{f.antwort}</p>
+    </details>
+  ))}
+</div>

@@ -1,0 +1,28 @@
+---
+import Basis from '../layouts/Basis.astro';
+import PreisTabelle from '../components/PreisTabelle.astro';
+import { preisEinleitung, preisStruktur, preisNebenhinweis, meta } from '../data/site';
+import { url } from '../lib/url';
+---
+<Basis titel={meta.preise.titel} beschreibung={meta.preise.beschreibung} brotkrumen={[{ name: 'Preise', pfad: 'preise/' }]}>
+  <div class="seitenkopf">
+    <div class="wrap">
+      <h1>Preise</h1>
+      <p class="lead">{preisEinleitung}</p>
+    </div>
+  </div>
+  <section class="ohne-oben preisseite">
+    <div class="wrap zwei">
+      <div class="preis">
+        <h2 class="sr">Alle Preise</h2>
+        <PreisTabelle />
+        <p class="notiz">{preisNebenhinweis}</p>
+      </div>
+      <div class="karte sanft struktur text">
+        <h2 style="font-size:30px">So ist die Dentosophie aufgebaut</h2>
+        {preisStruktur.map((p) => <p set:html={p} />)}
+        <p style="margin-top:22px">Was in der Begleitung passiert, liest du bei der <a class="mehr" style="margin-top:0" href={url('dentosophie/')}>Dentosophie</a>.</p>
+      </div>
+    </div>
+  </section>
+</Basis>

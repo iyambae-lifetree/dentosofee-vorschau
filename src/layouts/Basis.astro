@@ -1,0 +1,97 @@
+---
+import '@fontsource/lora/latin-400.css';
+import '@fontsource/lora/latin-500.css';
+import '@fontsource/lora/latin-400-italic.css';
+import '@fontsource/lora/latin-500-italic.css';
+import '@fontsource/poppins/latin-300.css';
+import '@fontsource/poppins/latin-400.css';
+import '@fontsource/poppins/latin-500.css';
+import '../styles/global.css';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import CtaVorgespraech from '../components/CtaVorgespraech.astro';
+import KiAssistent from '../components/KiAssistent.astro';
+import { praxis } from '../data/site';
+import { url } from '../lib/url';
+
+interface Props {
+  titel: string;
+  beschreibung: string;
+  cta?: boolean;
+  brotkrumen?: { name: string; pfad: string }[];
+  jsonld?: object[];
+}
+const { titel, beschreibung, cta = true, brotkrumen, jsonld = [] } = Astro.props;
+const kanonisch = new URL(Astro.url.pathname, Astro.site).href;
+const ogBild = new URL(url('og-blatt.png'), Astro.site).href;
+const startUrl = new URL(url(''), Astro.site).href;
+
+const geschaeft = {
+  '@context': 'https://schema.org',
+  '@type': 'HealthAndBeautyBusiness',
+  '@id': startUrl + '#praxis',
+  name: praxis.name,
+  description: 'Praxis für ganzheitliche Zahngesundheit in Frankfurt: Dentosophie und ganzheitliche Zahnpflege.',
+  url: startUrl,
+  image: ogBild,
+  address: {
+    '@type': 'PostalAddress',
+    streetAddress: praxis.strasse,
+    postalCode: praxis.plz,
+    addressLocality: 'Frankfurt am Main',
+    addressCountry: 'DE',
+  },
+  areaServed: 'Frankfurt am Main',
+  inLanguage: 'de',
+  founder: { '@type': 'Person', name: praxis.inhaberin, jobTitle: praxis.beruf },
+  // TODO: openingHours, telephone, email erst nach Bestätigung durch die Kundin ergänzen.
+};
+const krumen = brotkrumen && {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [{ name: 'Start', pfad: '' }, ...brotkrumen].map((k, i) => ({
+    '@type': 'ListItem',
+    position: i + 1,
+    name: k.name,
+    item: new URL(url(k.pfad), Astro.site).href,
+  })),
+};
+const alleJsonLd = [geschaeft, ...(krumen ? [krumen] : []), ...jsonld];
+---
+<!doctype html>
+<html lang="de">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{titel}</title>
+    <meta name="description" content={beschreibung} />
+    <!-- Vorschau Phase 1: bewusst nicht indexieren. Für den Go-Live (Phase 2) entfernen. -->
+    <meta name="robots" content="noindex, nofollow" />
+    <link rel="canonical" href={kanonisch} />
+    <link rel="icon" type="image/png" sizes="32x32" href={url('favicon-32.png')} />
+    <link rel="apple-touch-icon" sizes="180x180" href={url('apple-touch-icon.png')} />
+    <link rel="sitemap" href={url('sitemap-index.xml')} />
+    <meta name="theme-color" content="#F6F1E7" />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="de_DE" />
+    <meta property="og:site_name" content="Dentosofee" />
+    <meta property="og:title" content={titel} />
+    <meta property="og:description" content={beschreibung} />
+    <meta property="og:url" content={kanonisch} />
+    <meta property="og:image" content={ogBild} />
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content={titel} />
+    <meta name="twitter:description" content={beschreibung} />
+    {alleJsonLd.map((j) => <script type="application/ld+json" set:html={JSON.stringify(j)} />)}
+  </head>
+  <body>
+    <a class="skip" href="#inhalt">Zum Inhalt springen</a>
+    <Header />
+    <main id="inhalt" tabindex="-1">
+      <slot />
+    </main>
+    {cta && <CtaVorgespraech />}
+    <KiAssistent />
+    <Footer />
+  </body>
+</html>

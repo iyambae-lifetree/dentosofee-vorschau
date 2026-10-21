@@ -1,0 +1,20 @@
+---
+import { preise } from '../data/site';
+---
+<table class="preistabelle">
+  <caption class="sr">Preise der Praxis Dentosofee</caption>
+  <thead>
+    <tr><th scope="col">Leistung und Umfang</th><th scope="col" style="text-align:right">Preis</th></tr>
+  </thead>
+  {preise.map((g) => (
+    <tbody>
+      <tr class="gruppe"><th scope="rowgroup" colspan="2">{g.titel}</th></tr>
+      {g.zeilen.map((z) => (
+        <tr>
+          <th scope="row">{z.leistung}{z.umfang && <small>{z.umfang}</small>}</th>
+          <td class={z.folgt ? 'betrag offen' : 'betrag'}>{z.preis}</td>
+        </tr>
+      ))}
+    </tbody>
+  ))}
+</table>

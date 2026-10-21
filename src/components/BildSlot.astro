@@ -1,0 +1,11 @@
+---
+// Benannter Bild-Platzhalter (Spezifikation §9). TODO: durch echtes Foto ersetzen (Fotoshooting geplant).
+import Gingko from './Gingko.astro';
+interface Props { name: string; beschreibung: string; class?: string }
+const { name, beschreibung, class: klasse = '' } = Astro.props;
+---
+<!-- TODO Bild-Slot „{name}“: echtes Foto einsetzen -->
+<div class={`bildslot ${klasse}`} role="img" aria-label={`${beschreibung} (Foto folgt)`} data-bildslot={name}>
+  <Gingko />
+  <span aria-hidden="true">Foto folgt</span>
+</div>

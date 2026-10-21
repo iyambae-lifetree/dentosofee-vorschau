@@ -1,0 +1,14 @@
+---
+import Basis from '../layouts/Basis.astro';
+import { meta } from '../data/site';
+import { url } from '../lib/url';
+---
+<Basis titel={meta.fehler.titel} beschreibung={meta.fehler.beschreibung}>
+  <div class="seitenkopf">
+    <div class="wrap">
+      <h1>Diese Seite gibt es nicht.</h1>
+      <p class="lead">Vielleicht hat sich die Adresse geändert. Von der Startseite aus findest du alles Weitere.</p>
+      <p style="margin-top:28px"><a class="btn" href={url('')}>Zur Startseite</a></p>
+    </div>
+  </div>
+</Basis>

@@ -1,0 +1,49 @@
+---
+import { Image } from 'astro:assets';
+import logoBlatt from '../assets/logo-blatt.png';
+import { navigation } from '../data/site';
+import { url, istAktiv } from '../lib/url';
+import BuchungsLink from './BuchungsLink.astro';
+const pfad = Astro.url.pathname;
+---
+<header class="kopfzeile">
+  <div class="wrap">
+    <!-- Logo: Gingkoblatt von Miryams Visitenkarte, freigestellt. TODO: Vektordatei (Gingko und Fee) vom Kunden einsetzen. -->
+    <a class="logo" href={url('')} aria-label="Dentosofee, zur Startseite">
+      <Image src={logoBlatt} alt="" width={60} height={66} densities={[1, 2]} loading="eager" />
+      <span aria-hidden="true">Dentosofee</span>
+    </a>
+    <nav class="hauptnav" id="hauptnav" aria-label="Hauptnavigation">
+      <ul>
+        {navigation.map((n) => (
+          <li><a href={url(n.pfad)} aria-current={istAktiv(pfad, n.pfad) ? 'page' : undefined}>{n.label}</a></li>
+        ))}
+        <li class="nav-cta"><BuchungsLink /></li>
+      </ul>
+    </nav>
+    <div class="kopf-rechts">
+      <BuchungsLink class="btn sm" text="Vorgespräch buchen" />
+      <button class="burger" type="button" aria-expanded="false" aria-controls="hauptnav">
+        <span class="sr">Menü</span>
+        <svg class="auf" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 7h18M3 12h18M3 17h18" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" fill="none"/></svg>
+        <svg class="zu" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" fill="none"/></svg>
+      </button>
+    </div>
+  </div>
+</header>
+<script>
+  const knopf = document.querySelector<HTMLButtonElement>('.burger');
+  const nav = document.getElementById('hauptnav');
+  if (knopf && nav) {
+    const setze = (offen: boolean) => {
+      knopf.setAttribute('aria-expanded', String(offen));
+      nav.classList.toggle('offen', offen);
+    };
+    knopf.addEventListener('click', () => setze(knopf.getAttribute('aria-expanded') !== 'true'));
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && knopf.getAttribute('aria-expanded') === 'true') { setze(false); knopf.focus(); }
+    });
+    nav.addEventListener('click', (e) => { if ((e.target as HTMLElement).closest('a')) setze(false); });
+    matchMedia('(min-width: 1101px)').addEventListener('change', (e) => { if (e.matches) setze(false); });
+  }
+</script>

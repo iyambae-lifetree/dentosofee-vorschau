@@ -1,0 +1,127 @@
+---
+import { Image } from 'astro:assets';
+import Basis from '../layouts/Basis.astro';
+import BuchungsLink from '../components/BuchungsLink.astro';
+import FaqAccordion from '../components/FaqAccordion.astro';
+import portraet from '../assets/miryam-016.jpg';
+import gemaelde from '../assets/miryam-005.jpg';
+import { start, leistungen, dentosophie, faq, ueberMich, meta, cta } from '../data/site';
+import { url } from '../lib/url';
+
+const weitere = leistungen.filter((l) => !['dentosophie', 'zahnpflege'].includes(l.id));
+// Reihenfolge wie im Mockup: Dentcoat, Bowen, Fußmassage, Häusliche Zahnpflege, Infrarot, Vorträge
+const reihenfolge = ['dentcoat', 'bowen', 'fussmassage', 'hausbesuche', 'infrarot', 'vortraege'];
+weitere.sort((a, b) => reihenfolge.indexOf(a.id) - reihenfolge.indexOf(b.id));
+const fragenAuswahl = [1, 3, 4, 6].map((i) => faq[i]);
+---
+<Basis titel={meta.start.titel} beschreibung={meta.start.beschreibung}>
+  <div class="hero">
+    <div class="wrap">
+      <div>
+        <h1>{start.h1a} <em>{start.h1b}</em></h1>
+        <p class="untertitel">{start.untertitel}</p>
+        {start.absaetze.map((a) => <p>{a}</p>)}
+        <p style="margin-top:16px">{start.kernEinleitung}</p>
+        <p class="kern">{start.kern}</p>
+        <div class="knoepfe">
+          <BuchungsLink text={cta.button} />
+          <a class="btn ghost" href={url('dentosophie/')}>Mehr über Dentosophie</a>
+        </div>
+        <span class="hinweis-neu">{cta.hinweis}</span>
+      </div>
+      <div class="foto">
+        <Image src={portraet} alt="Hilda Miryam Loewenstein in ihrer Praxis" widths={[400, 600, 900, 1146]} sizes="(max-width: 860px) 100vw, 520px" loading="eager" fetchpriority="high" style="object-position:60% 20%" />
+      </div>
+    </div>
+  </div>
+
+  <div class="trust">
+    <ul class="wrap">
+      {start.vertrauen.map((v) => <li><b>{v.marke}</b> {v.text}</li>)}
+    </ul>
+  </div>
+
+  <section aria-labelledby="wege-titel">
+    <div class="wrap">
+      <div class="kopf"><h2 id="wege-titel">{start.wegeTitel}</h2><p>{start.wegeText}</p></div>
+      <div class="wege">
+        {start.wege.map((w, i) => (
+          <div class={i === 0 ? 'weg gross' : 'weg'}>
+            <span class="nr" aria-hidden="true">0{i + 1}</span>
+            <h3>{w.titel}</h3>
+            <p>{w.text}</p>
+            <a class="mehr" href={url(w.pfad)}>{w.link}</a>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="ohne-oben" aria-labelledby="mehr-titel">
+    <div class="wrap">
+      <div class="kopf" style="margin-bottom:32px"><h2 id="mehr-titel" class="h2-klein">Und außerdem für dich da</h2></div>
+      <ul class="mehrang">
+        {weitere.map((l) => (
+          <li>
+            <h3><a href={url(`leistungen/#${l.id}`)}>{l.titel}</a></h3>
+            {l.bald ? <p><span class="bald">bald verfügbar</span></p> : <p>{l.kurz}</p>}
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <section class="dento" aria-labelledby="dento-titel">
+    <div class="wrap">
+      <div>
+        <h2 id="dento-titel">Was ist Dentosophie?</h2>
+        <p>Im Mundraum laufen drei Funktionen ganz unbewusst ab: Kauen, Schlucken und Atmen. Mit einem individuell angepassten, weichen Silikonkissen, dem Balancer, übst du diese Funktionen Schritt für Schritt wieder physiologisch ein, also so, wie dein Körper es vorgesehen hat.</p>
+        <p class="zitat">„Ein satterer Biss, gelöstere Verspannungen, eine aufrechtere Haltung.“</p>
+        <p style="margin-top:10px;color:var(--muted)">So beschreiben viele Menschen, was sie mit der Zeit erleben.</p>
+        <a class="mehr" href={url('dentosophie/')}>Mehr über Dentosophie</a>
+      </div>
+      <div>
+        <ol class="weg-linie">
+          {dentosophie.ablauf.map((s, i) => (
+            <li class="schritt"><span class="kreis" aria-hidden="true">{i + 1}</span><h3>{s.titel}</h3><p>{s.text}</p></li>
+          ))}
+        </ol>
+        <p class="hinweis">{dentosophie.hinweis}</p>
+      </div>
+    </div>
+  </section>
+
+  <section aria-labelledby="fragen-titel">
+    <div class="wrap zwei">
+      <div>
+        <div class="kopf" style="margin-bottom:20px"><h2 id="fragen-titel">{dentosophie.faqTitel}</h2></div>
+        <FaqAccordion fragen={fragenAuswahl} />
+        <a class="mehr" href={url('dentosophie/#fragen')}>Alle Fragen und Antworten</a>
+      </div>
+      <div class="preis">
+        <h3>Preise, klar und offen</h3>
+        <div class="zeile"><span>Dentosophie Erwachsene<small>ca. 6 Monate · 4–5 Termine</small></span><span>1.000&nbsp;€</span></div>
+        <div class="zeile"><span>Dentosophie Kinder<small>ca. 12 Monate · 6–8 Termine</small></span><span>1.500&nbsp;€</span></div>
+        <div class="zeile"><span>Ganzheitliche Zahnpflege<small>30 / 60 Minuten</small></span><span>50 / 100&nbsp;€</span></div>
+        <p class="notiz">Zahlung auf einmal oder in Raten. Dentosophie ist keine Kassenleistung.</p>
+        <a class="mehr" href={url('preise/')}>Alle Preise ansehen</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="ueber" aria-labelledby="ueber-titel">
+    <div class="wrap">
+      <div class="foto">
+        <Image src={gemaelde} alt="" width={1000} height={667} widths={[400, 700, 1000]} sizes="(max-width: 860px) 100vw, 430px" style="object-position:30% 40%" />
+      </div>
+      <div>
+        <h2 id="ueber-titel">{ueberMich.titel}</h2>
+        <p>{ueberMich.absaetze[0]}</p>
+        <p>Ich bin zweifache Mutter und seit mehreren Jahren mit Herzblut auf die funktionellen Zusammenhänge im Mundraum spezialisiert. In meiner selbstständigen Arbeit sehe ich den ganzen Menschen. Meine Begleitung ist funktionell und achtsam.</p>
+        <p class="leit">{ueberMich.leitsatz}</p>
+        <ul class="chips"><li>ZMP</li><li>30+ Jahre Erfahrung</li><li>Dentosophie</li><li>Ganzheitliche Zahnpflege</li></ul>
+        <a class="mehr" href={url('ueber-mich/')}>Mehr über mich</a>
+      </div>
+    </div>
+  </section>
+</Basis>

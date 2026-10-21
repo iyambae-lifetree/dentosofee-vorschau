@@ -1,0 +1,23 @@
+---
+import Basis from '../layouts/Basis.astro';
+import Gingko from '../components/Gingko.astro';
+import { wissenLeer, meta } from '../data/site';
+import { url } from '../lib/url';
+// TODO: Beiträge ergänzen (Spezifikation §4: Phase 1 Gerüst mit 0–2 Beispielartikeln).
+---
+<Basis titel={meta.wissen.titel} beschreibung={meta.wissen.beschreibung} brotkrumen={[{ name: 'Wissen', pfad: 'wissen/' }]}>
+  <div class="seitenkopf">
+    <div class="wrap">
+      <h1>Wissen</h1>
+      <p class="lead">{wissenLeer}</p>
+    </div>
+  </div>
+  <section class="ohne-oben">
+    <div class="wrap schmal">
+      <div class="karte sanft leer">
+        <Gingko />
+        <p>Bis dahin findest du viele Antworten bei den <a class="mehr" style="margin-top:0" href={url('dentosophie/#fragen')}>Fragen zur Dentosophie</a>.</p>
+      </div>
+    </div>
+  </section>
+</Basis>

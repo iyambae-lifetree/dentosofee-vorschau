@@ -1,0 +1,36 @@
+---
+import Basis from '../layouts/Basis.astro';
+import BuchungsLink from '../components/BuchungsLink.astro';
+import BildSlot from '../components/BildSlot.astro';
+import { kontakt, praxis, cta, meta } from '../data/site';
+---
+<Basis titel={meta.kontakt.titel} beschreibung={meta.kontakt.beschreibung} brotkrumen={[{ name: 'Kontakt', pfad: 'kontakt/' }]}>
+  <div class="seitenkopf">
+    <div class="wrap raster-2">
+      <div class="text">
+        <h1>Kontakt &amp; Buchung</h1>
+        {kontakt.absaetze.map((a) => <p class="lead" set:html={a} />)}
+        <div style="margin-top:30px">
+          <BuchungsLink text={cta.button} />
+          <span class="hinweis-neu">{cta.hinweis}</span>
+        </div>
+      </div>
+      <div class="karte">
+        <h2 style="font-size:28px">Praxis</h2>
+        <ul class="kontaktliste">
+          <li><span class="lbl">Anschrift</span><address class="adresse">{praxis.name}, {praxis.inhaberin}<br />{praxis.strasse}<br />{praxis.plz} {praxis.ort}</address></li>
+          <li><span class="lbl">Buchung</span><span>Online über Calendall</span></li>
+          <!-- TODO: E-Mail-Adresse noch nicht bestätigt (kontakt@dentosofee.de ist noch einzurichten). Bis dahin nicht verlinken. -->
+          <li><span class="lbl">E-Mail</span><span>{praxis.email}</span></li>
+          <li><span class="lbl">Telefon</span><span>{praxis.telefon}</span></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <section class="ohne-oben" aria-label="Foto der Praxis">
+    <div class="wrap">
+      <BildSlot name="praxis-aussen" beschreibung="Die Praxis Dentosofee in Frankfurt" class="breit" />
+    </div>
+  </section>
+</Basis>
+<style>.breit { aspect-ratio: 21 / 8; } @media (max-width: 860px) { .breit { aspect-ratio: 4 / 3; } }</style>

@@ -1,0 +1,3 @@
+# Vorschau (Phase 1): bewusst nicht indexieren.
+User-agent: *
+Disallow: /

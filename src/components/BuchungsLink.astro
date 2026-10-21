@@ -1,0 +1,6 @@
+---
+import { BUCHUNG_URL } from '../data/site';
+interface Props { class?: string; text?: string }
+const { class: klasse = 'btn', text = 'Kostenfreies Vorgespräch buchen' } = Astro.props;
+---
+<a class={klasse} href={BUCHUNG_URL} target="_blank" rel="noopener">{text}<span class="sr"> (öffnet sich in neuem Fenster)</span></a>
