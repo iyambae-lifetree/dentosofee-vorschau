@@ -322,10 +322,19 @@ export const preisNebenhinweis = 'Auf Messen und bei Aktionen gibt es die Dentco
 // Über mich (§5.3, Nr. 26; Nr. 27 bewusst weggelassen)
 export const ueberMich = {
   titel: 'Mein Name ist Hilda Miryam Loewenstein.',
+  // Miryams eigener Text vom 23.10.2026 (Telegram). Angepasst: Gedankenstrich → Komma,
+  // „Ich gebe Raum für Heilung“ → „Ich gebe dir Raum“ (HWG, kein Heilversprechen).
   absaetze: [
+    'Bei mir darfst du ankommen. Ich gebe dir Raum, zur Ruhe zu kommen, deinen Körper wahrzunehmen und herauszufinden, was du brauchst.',
+    'Zähne und Mund sind mein beruflicher Ursprung. Über mehr als 30 Jahre ist mein Blick weiter geworden: Mich interessiert der Mensch, der zu mir kommt, mit seinen Fragen, seiner Geschichte und dem, was ihn gerade beschäftigt.',
+    'Ich höre zu, schaue genau hin und bringe mein Wissen und meine Erfahrung ein. Gemeinsam finden wir Schritte, die zu dir passen und die du in deinen Alltag mitnehmen kannst.',
+    'So verstehe ich meine Arbeit: Ich gebe dir Raum und begleite dich auf deinem eigenen Weg.',
+  ],
+  // Spezifikation Nr. 26, ohne den dritten Absatz („Was mich bis heute begeistert …“),
+  // den Miryams eigener Text jetzt trägt
+  werdegang: [
     'Seit über 30 Jahren arbeite ich im Bereich der zahnmedizinischen Prophylaxe und begleite heute Kinder, Jugendliche und Erwachsene ganzheitlich rund um Mund, Kiefer und Nervensystem.',
     'Ich bin zweifache Mutter und seit mehreren Jahren mit Herzblut auf die funktionellen Zusammenhänge im Mundraum spezialisiert. In meiner selbstständigen Arbeit sehe ich den ganzen Menschen. Meine Begleitung ist funktionell und achtsam. Sie versteht sich ausdrücklich nicht als medizinische Behandlung, und ich stelle keine Diagnosen.',
-    'Was mich bis heute begeistert: Menschen nicht einfach zu behandeln, sondern sie dabei zu begleiten, ihre eigenen Funktionen und Gewohnheiten wahrzunehmen und Schritt für Schritt zu verändern.',
   ],
   // Originalsatz aus Miryams Flyer
   leitsatz: 'Wenn die Funktionen im Mundraum harmonisch ablaufen, entsteht Raum und natürliche Entspannung.',

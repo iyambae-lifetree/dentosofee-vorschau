@@ -26,7 +26,8 @@ import { ueberMich, praxis, meta } from '../data/site';
       </div>
       <div>
         <h2 id="profil-titel" style="font-size:36px">Kurzprofil</h2>
-        <ul class="profil">{ueberMich.kurzprofil.map((k) => <li>{k}</li>)}</ul>
+        {ueberMich.werdegang.map((a) => <p>{a}</p>)}
+        <ul class="profil" style="margin-top:22px">{ueberMich.kurzprofil.map((k) => <li>{k}</li>)}</ul>
         <p class="hinweis" style="margin-top:22px">{praxis.berufLang}. {praxis.disclaimer}</p>
       </div>
     </div>
