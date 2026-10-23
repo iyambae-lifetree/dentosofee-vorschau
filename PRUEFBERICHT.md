@@ -1,6 +1,6 @@
 # Prüfbericht Dentosofee-Vorschau
 
-Stand 21.10.2026, Astro 7.4.2, lokal gebaut. Nichts hochgeladen, nichts gepusht.
+Stand 21.10.2026, Astro 7.4.2, lokal gebaut. Seit 21.10. online unter https://iyambae-lifetree.github.io/dentosofee-vorschau/ (Nachtrag 23.10.: Deploy läuft bei jedem Push, Leitsätze ohne Goldbalken live geprüft).
 
 ## Technische Prüfung
 
@@ -54,7 +54,7 @@ Accessibility 96 mobil: Lighthouse bemängelt den Kontrast der Wortmarke „Dent
 | Design folgt Tokens; natürlich, warm, hochwertig; Gingko dezent | erfüllt | Tokens aus dem Mockup in `global.css`; Startseite entspricht dem Mockup; Gingko-SVG im Einladungsblock, Fuß, Trenner, Bild-Platzhaltern; Logo-Blatt |
 | `/impressum` und `/datenschutz` als Gerüst mit markierten TODO | erfüllt | sichtbare gestrichelte TODO-Kästen plus HTML-Kommentare |
 | HWG-Leitplanken §8.1; Disclaimer sichtbar | erfüllt | Disclaimer im Fuß jeder Seite und auf `/leistungen`, `/dentosophie`, `/ueber-mich`; Beruf nur „ZMP (Zahnmedizinische Prophylaxe-Assistentin)“; Dentcoat nur erlebbare Eigenschaften; „Begleitung“ und „Sitzung“ statt „Behandlung“; anwaltliche Prüfung vor Go-Live bleibt offen |
-| Vorschau-URL deployt; Preview `noindex`; Lighthouse-Ziele | teilweise | `noindex` erfüllt; Lighthouse Performance ≥ 95, Accessibility ≥ 90, Best Practices ≥ 95 erfüllt, SEO bewusst durch noindex gedrückt; **Deploy offen** (laut Auftrag nicht hochgeladen, Workflow liegt bereit) |
+| Vorschau-URL deployt; Preview `noindex`; Lighthouse-Ziele | erfüllt | `noindex` erfüllt; Lighthouse Performance ≥ 95, Accessibility ≥ 90, Best Practices ≥ 95 erfüllt, SEO bewusst durch noindex gedrückt; deployt seit 21.10. über GitHub Actions |
 | Logo- und Bild-Slots als Platzhalter markiert, leicht austauschbar | erfüllt | `BildSlot` mit sichtbarem „Foto folgt“, `data-bildslot`-Namen und TODO-Kommentar; Logo-Blatt als Datei in `src/assets/` mit TODO für Vektordatei |
 | `README.md`: starten, Inhalte pflegen, was offen ist | erfüllt | `README.md` mit TODO-Liste |
 
