@@ -1,10 +1,13 @@
 ---
+import { getImage } from 'astro:assets';
 import { cta } from '../data/site';
 import BuchungsLink from './BuchungsLink.astro';
-import Gingko from './Gingko.astro';
+import gemaelde from '../assets/miryam-005.jpg';
+
+// Miryams eigenes Gemälde als Grund der Einladung, abgedunkelt in Petrol
+const flaeche = await getImage({ src: gemaelde, width: 1600, format: 'webp', quality: 60 });
 ---
-<section class="cta" aria-labelledby="cta-titel">
-  <Gingko class="ging-deko" />
+<section class="cta" aria-labelledby="cta-titel" style={`--gemaelde: url(${flaeche.src})`}>
   <div class="wrap">
     <h2 id="cta-titel">{cta.titel}</h2>
     <p>{cta.text}</p>

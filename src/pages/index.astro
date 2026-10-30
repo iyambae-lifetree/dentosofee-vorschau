@@ -8,10 +8,8 @@ import gemaelde from '../assets/miryam-005.jpg';
 import { start, leistungen, dentosophie, faq, ueberMich, meta, cta } from '../data/site';
 import { url } from '../lib/url';
 
+// Reihenfolge wie auf der Seite Leistungen (site.ts)
 const weitere = leistungen.filter((l) => !['dentosophie', 'zahnpflege'].includes(l.id));
-// Reihenfolge wie im Mockup: Dentcoat, Bowen, Fußmassage, Häusliche Zahnpflege, Infrarot, Vorträge
-const reihenfolge = ['dentcoat', 'bowen', 'fussmassage', 'hausbesuche', 'infrarot', 'vortraege'];
-weitere.sort((a, b) => reihenfolge.indexOf(a.id) - reihenfolge.indexOf(b.id));
 const fragenAuswahl = [1, 3, 4, 6].map((i) => faq[i]);
 ---
 <Basis titel={meta.start.titel} beschreibung={meta.start.beschreibung}>
@@ -20,7 +18,7 @@ const fragenAuswahl = [1, 3, 4, 6].map((i) => faq[i]);
       <div>
         <h1>{start.h1a} <em>{start.h1b}</em></h1>
         <p class="untertitel">{start.untertitel}</p>
-        {start.absaetze.map((a) => <p>{a}</p>)}
+        <p>{start.absaetze[0]}</p>
         <p style="margin-top:16px">{start.kernEinleitung}</p>
         <p class="kern">{start.kern}</p>
         <div class="knoepfe">
@@ -32,6 +30,12 @@ const fragenAuswahl = [1, 3, 4, 6].map((i) => faq[i]);
       <div class="foto">
         <Image src={portraet} alt="Hilda Miryam Loewenstein in ihrer Praxis" widths={[400, 600, 900, 1146]} sizes="(max-width: 860px) 100vw, 520px" loading="eager" fetchpriority="high" style="object-position:60% 20%" />
       </div>
+    </div>
+  </div>
+
+  <div class="einstieg">
+    <div class="wrap">
+      {start.absaetze.slice(1).map((a) => <p>{a}</p>)}
     </div>
   </div>
 
@@ -47,7 +51,6 @@ const fragenAuswahl = [1, 3, 4, 6].map((i) => faq[i]);
       <div class="wege">
         {start.wege.map((w, i) => (
           <div class={i === 0 ? 'weg gross' : 'weg'}>
-            <span class="nr" aria-hidden="true">0{i + 1}</span>
             <h3>{w.titel}</h3>
             <p>{w.text}</p>
             <a class="mehr" href={url(w.pfad)}>{w.link}</a>
