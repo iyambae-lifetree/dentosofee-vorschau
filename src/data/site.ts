@@ -244,10 +244,15 @@ export const leistungen: Leistung[] = [
   {
     id: 'fussmassage',
     titel: 'Psychosomatische Energie-Fußmassage',
-    kurz: 'Regulierend und ganzheitlich unterstützend.',
-    // Übergangstext aus Spezifikation §7.1. TODO: endgültige Kurzbeschreibung von Miryam einsetzen.
-    text: ['Regulierend und ganzheitlich unterstützend.'],
-    folgt: 'Eine ausführlichere Beschreibung folgt.',
+    kurz: 'Sanfte, kreisende Berührungen an deinen Füßen. Zeit, in der du zur Ruhe kommst.',
+    // Text nach Weisung Sāmi-Ra 01.11.2026, Fakten von mario-gueltig.de (Miryams Lehrer), in ihrer Stimme neu geschrieben.
+    // TODO Miryam: bestätigen, dass sie Mario Gültig und „Soultouch“ öffentlich nennen will und die Beschreibung so stimmt.
+    // Dauer, Fußbad und Preise des Lehrers bewusst nicht übernommen: das ist seine Praxis, nicht ihre.
+    text: [
+      'Bei dieser Fußmassage arbeite ich mit sanften, kreisenden und streichenden Berührungen. Sie ist anders als eine klassische Fußreflexzonenmassage.',
+      'Gelernt habe ich sie bei Mario Gültig. Er hat sie als Soultouch Feet Massage aus der Arbeit von Friedrich Butzbach weiterentwickelt.',
+      'Jede Sitzung stimme ich auf dich ab. Du darfst einfach liegen, nichts leisten und ankommen.',
+    ],
     // TODO: Preis fehlt in der Spezifikation, von Miryam erfragen. Bis dahin nur „Preis folgt“.
     preisFolgt: true,
   },
